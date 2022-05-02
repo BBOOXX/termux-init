@@ -6,13 +6,6 @@ case "$PREFIX" in
     *) termux=false ;;
 esac
 
-if [ "$termux" != true ]; then
-    echo "Error: 418.\nI cannot brew your coffee because I'm a teapot."
-    exit 1
-else
-    main
-fi
-
 main() {
     pkg install git
 
@@ -52,3 +45,11 @@ _pipenv() {
 compdef _pipenv pipenv
 EOF
 }
+
+if [ "$termux" != true ]; then
+    echo "Error: 418.\nI cannot brew your coffee because I'm a teapot."
+    exit 1
+else
+    main
+fi
+
