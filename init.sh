@@ -29,6 +29,7 @@ main() {
 
     git clone https://github.com/bbooxx/vimrc
     ./vimrc/install.sh
+    chsh -s zsh
     cat >> $HOME/.zshrc <<EOF
 HIST_STAMPS="yyyy-mm-dd"
 export LANG=en_US.UTF-8
@@ -42,14 +43,6 @@ ZSH_AUTOSUGGEST_CLEAR_WIDGETS+=(bracketed-paste accept-line)
 export PYTHONBREAKPOINT="pudb.set_trace"
 export COLORTERM="truecolor"
 export PIPENV_SKIP_LOCK=True
-
-zstyle -e ':completion::*:*:*:hosts' hosts 'reply=($(grep -v "HostName\|\*" ~/.ssh/config | grep Host | cut -d" " -f2))'
-
-_pipenv() {
-    eval $(env COMMANDLINE="${words[1,$CURRENT]}" _PIPENV_COMPLETE=complete-zsh pipenv)
-}
-
-compdef _pipenv pipenv
 EOF
 }
 
