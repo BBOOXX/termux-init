@@ -1,9 +1,6 @@
 #!/usr/bin/env bash
 set -e
 
-cd $(dirname $0)
-export BASE=$(pwd)
-
 case "$PREFIX" in
     *com.termux*) termux=true ;;
     *) termux=false ;;
@@ -11,17 +8,21 @@ esac
 
 if [ "$termux" != true ]; then
     echo "Error: 418.\nI cannot brew your coffee because I'm a teapot."
+    exit 1
 else
     main
 fi
 
 main() {
-    cp $BASE/.termux/colors.properties $HOME/.termux
-    cp $BASE/.termux/font.ttf $HOME/.termux
+    pkg install git
+
+    git clone https://github.com/bbooxx/termux-init --depth=1
+    cp termux-init/.termux/colors.properties $HOME/.termux
+    cp termux-init/.termux/font.ttf $HOME/.termux
     termux-reload-settings
 
     pkg update -y
-    pkg install -y termux-api zsh curl wget vim-python jq cmake build-essential libjansson automake pkg-config
+    pkg install -y termux-api zsh wget vim-python jq cmake build-essential libjansson automake pkg-config
     sh -c "$(curl -fsSL https://raw.github.com/ohmyzsh/ohmyzsh/master/tools/install.sh)"
     omz theme set avit
     git clone https://github.com/zsh-users/zsh-autosuggestions ${ZSH_CUSTOM:-~/.oh-my-zsh/custom}/plugins/zsh-autosuggestions
