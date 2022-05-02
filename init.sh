@@ -16,10 +16,18 @@ main() {
 
     pkg update -y
     pkg install -y termux-api zsh wget vim-python jq cmake build-essential libjansson automake pkg-config
+
+    RUNZSH=no
     sh -c "$(curl -fsSL https://raw.github.com/ohmyzsh/ohmyzsh/master/tools/install.sh)"
-    omz theme set avit
+
+    SET_ZSH_THEME=avit
+    sed -i 's/^\s*ZSH_THEME=.*$/ZSH_THEME=\"'$SET_ZSH_THEME'\"/' $HOME/.zshrc
+
+    SET_ZSH_PLUGINS=zsh-autosuggestions
+    sed -i 's/\(^plugins=([^)]*\)/\1 '$SET_ZSH_PLUGINS'/' $HOME/.zshrc
+
     git clone https://github.com/zsh-users/zsh-autosuggestions ${ZSH_CUSTOM:-~/.oh-my-zsh/custom}/plugins/zsh-autosuggestions
-    omz plugin enable zsh-autosuggestions
+
     git clone https://github.com/bbooxx/vimrc
     ./vimrc/install.sh
     cat >> $HOME/.zshrc <<EOF
