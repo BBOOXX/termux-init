@@ -17,8 +17,7 @@ main() {
     pkg update -y
     pkg install -y termux-api zsh wget vim-python jq cmake build-essential libjansson automake pkg-config
 
-    RUNZSH=no
-    sh -c "$(curl -fsSL https://raw.github.com/ohmyzsh/ohmyzsh/master/tools/install.sh)"
+    sh -c "$(curl -fsSL https://raw.github.com/ohmyzsh/ohmyzsh/master/tools/install.sh)" "" --unattended
 
     SET_ZSH_THEME=avit
     sed -i 's/^\s*ZSH_THEME=.*$/ZSH_THEME=\"'$SET_ZSH_THEME'\"/' $HOME/.zshrc
