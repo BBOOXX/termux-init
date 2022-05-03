@@ -22,6 +22,9 @@ fmt_error() {
 }
 
 main() {
+    fmt_text "PKG Update ..."
+    yes | pkg update
+
     fmt_text "Install Git ..."
     pkg install git
 
@@ -34,7 +37,7 @@ main() {
     fmt_text "Set termux font ..."
     cp termux-init/.termux/font.ttf $HOME/.termux
 
-    fmt_text "🪄   magic"
+    fmt_text "🪄 Magic!"
     termux-reload-settings
 
     fmt_text "Install common tools ..."
