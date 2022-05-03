@@ -14,11 +14,11 @@ case "$PREFIX" in
 esac
 
 fmt_text(){
-  printf '%s%s%s\n' "${FMT_BOLD}${FMT_GREEN}" "$*" "$FMT_RESET" >&2
+  printf '%s%s%s\n' "${FMT_GREEN}" "$*" "$FMT_RESET" >&2
 }
 
 fmt_error() {
-  printf '%sError: %s%s\n' "${FMT_BOLD}${FMT_RED}" "$*" "$FMT_RESET" >&2
+  printf '%sError: %s%s\n' "${FMT_RED}" "$*" "$FMT_RESET" >&2
 }
 
 main() {
@@ -41,7 +41,7 @@ main() {
     termux-reload-settings
 
     fmt_text "Install common tools ..."
-    pkg install -y termux-api zsh wget vim-python jq cmake build-essential libjansson automake pkg-config
+    pkg install -y termux-api zsh wget vim-python jq cmake build-essential libjansson automake pkg-config openssh man
 
     fmt_text "Install ohmyzsh ..."
     sh -c "$(curl -fsSL https://raw.github.com/ohmyzsh/ohmyzsh/master/tools/install.sh)" "" --unattended
